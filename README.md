@@ -36,24 +36,45 @@ The only dependency is `pdfplumber`, which itself pulls in `pdfminer.six` and a 
 
 ## Usage
 
-### Basic
+### Using the wrapper script (recommended)
+
+The `extract-gpay.sh` wrapper provides a convenient interface with additional checks and status messages:
 
 ```bash
-python extract_gpay.py google-pay-statement.pdf
+# Basic usage - outputs to output/google-pay-statement.json
+./extract-gpay.sh data/google-pay-statement.pdf
+
+# Custom output path
+./extract-gpay.sh data/google-pay-statement.pdf --output my-transactions.json
+
+# Quiet mode (suppress verification output)
+./extract-gpay.sh data/google-pay-statement.pdf --quiet
+
+# Show help
+./extract-gpay.sh --help
 ```
 
-This produces `google-pay-statement-transactions.json` in the same directory as the PDF.
+The wrapper script will:
+- Verify that Python 3 and the extraction script are available
+- Display the input filename and output path
+- Run the extraction and verification
+- Print "Ok" on successful completion
 
-### Custom output path
+**Default output location**: `output/<filename>.json` (the `output/` directory will be created automatically if it doesn't exist)
+
+### Using Python directly
+
+You can also invoke the Python script directly:
 
 ```bash
-python extract_gpay.py google-pay-statement.pdf --output my-transactions.json
-```
+# Basic usage - outputs to output/google-pay-statement.json
+python extract_gpay.py data/google-pay-statement.pdf
 
-### Quiet mode (skip verification output)
+# Custom output path
+python extract_gpay.py data/google-pay-statement.pdf --output my-transactions.json
 
-```bash
-python extract_gpay.py google-pay-statement.pdf --quiet
+# Quiet mode (skip verification output)
+python extract_gpay.py data/google-pay-statement.pdf --quiet
 ```
 
 ## Output Format

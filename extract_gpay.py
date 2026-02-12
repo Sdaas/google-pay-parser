@@ -10,8 +10,10 @@ Usage:
     python extract_gpay.py <pdf_path> [--output <json_path>]
 
 Example:
-    python extract_gpay.py google-pay-statement.pdf
-    python extract_gpay.py google-pay-statement.pdf --output transactions.json
+    python extract_gpay.py data/google-pay-statement.pdf
+    python extract_gpay.py data/google-pay-statement.pdf --output transactions.json
+
+Default output: output/<filename>.json (output directory will be created if needed)
 """
 
 import argparse
@@ -332,7 +334,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output", "-o",
         default=None,
-        help="Output JSON file path (default: <pdf_name>-transactions.json in same directory as PDF)",
+        help="Output JSON file path (default: output/<pdf_name>.json)",
     )
     parser.add_argument(
         "--quiet", "-q",
@@ -357,7 +359,12 @@ def main():
     if args.output:
         output_path = Path(args.output)
     else:
-        output_path = pdf_path.with_name(pdf_path.stem + "-transactions.json")
+        # Default: output/<pdf_name>.json
+        output_dir = Path("output")
+        output_path = output_dir / f"{pdf_path.stem}.json"
+
+    # Ensure output directory exists
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Extract
     print(f"Extracting transactions from: {pdf_path}")

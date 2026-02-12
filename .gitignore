@@ -1,2 +1,12 @@
+## Mac Stuff
+.DS_Store 
+
+## Python Stuff
+venv/
+.venv/ 
+__pycache__/ 
+*.pyc
+
+## Data Folders
 data/
 output/
