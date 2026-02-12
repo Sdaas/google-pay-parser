@@ -35,6 +35,22 @@ pip install -r requirements.txt
 The only dependency is `pdfplumber`, which itself pulls in `pdfminer.six` and a few other lightweight packages.
 
 ## Usage
+### Getting the Google Pay Transactions
+
+Based on Google Pay Version `317.1.1`
+
+To down the PDF
+- Launch the app
+- Scroll down and select `See Trasnaction History`
+- Next to `Transaction History` select `See All`
+- In the top search bar, select `...` and then `Get Statement`
+- Select `Last Six Months` and then continue
+
+To get the app version number.
+- Launch the app
+- Click on `you` (your picture) should be at bottom right
+- Select `Settings`
+- Select `About` 
 
 ### Using the wrapper script (recommended)
 
